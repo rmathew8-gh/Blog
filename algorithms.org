@@ -1,0 +1,378 @@
+#+setupfile: ~/.org-mode-goodies/setup.org
+
+* Links
+- https://levelup.gitconnected.com
+- [[https://www.designgurus.io/blog/Mastering-the-System-Design-Interview-Complete-Guide][10 system design questions]]
+- [[https://www.designgurus.io/blog/dont-just-leetcode][Don't Just LeetCode; Follow the Coding Patterns Instead]]
+* Progression [7/12]
+- [X] 1. Sliding Window...
+- [X] 2. Two Pointers...
+- [ ] 3. Two Heaps...
+- [ ] 4. Backtracking...
+- [X] 5. Breadth-First Search (BFS)...
+- [X] 6. Depth-First Search (DFS)...
+- [X] 7. Topological Sort...
+- [ ] 8. Merge Intervals...
+- [X] 9. Trie (Prefix Tree)...
+- [ ] 10. Union-Find (Disjoint Set)...
+- [X] 11. Flood Fill...
+- [ ] 12. Segment Tree...
+
+
+* Tree Traversal
+** Types
+- Breadth-First Traversal (/Queue based - FIFO/)
+- Depth-First Traversal (/Stack based - LIFO/)
+  - Pre-order traversal
+  - Post-order traversal
+  - In-order traversal
+
+** Use Cases
+
+*** Pre-order:
+  Used to create a copy of a tree. For example, if you want to create a replica
+  of a tree, put the nodes in an array with a pre-order traversal. Then perform
+  an Insert operation on a new tree for each value in the array. You will end up
+  with a copy of your original tree.
+
+*** In-order:
+  Used to get the values of the nodes in non-decreasing order in a BST.
+
+*** Post-order:
+  Used to delete a tree from leaf to root
+
+** Algorithms
+*** PreOrder(node):
+     #+begin_src python
+     print node.value # root node first
+     PreOrder(node.left)
+     PreOrder(node.right)
+     #+end_src
+*** InOrder(node):
+     #+begin_src python
+     PreOrder(node.left)
+     print node.value  # root node in the middle
+     PreOrder(node.right)
+     #+end_src
+*** PostOrder(node):
+     #+begin_src python
+     PreOrder(node.left)
+     PreOrder(node.right)
+     print node.valuefirst # root node last
+     #+end_src
+
+* Sliding Window
+** System Design Examples:
+- Video/audio streaming: buffering playback based on network conditions. 
+- Data compression: identify repeating patterns
+- DDoS: detect anomalies, attacks.
+- Text search: (e.g Boyer-Moore; find substrings)
+
+* Two Pointers
+** Summary
+Use iterators to traverse sequences.
+Use to compare pairs; pointers move in same or opposite directions.
+** *System Design Examples:*
+- Binary search: pointers to narrow search space
+- Comparing DNA sequences
+- Merge step in the merge-sort algorithm
+- Detecting palindromes
+
+* Two Heaps
+** Summary
+- finding the median
+- a min-heap and a max-heap divide data nearly equally
+- max-heap stores smaller half; min-heap the larger half.
+** *System Design Examples:*
+- OLAP summary statistics over a sliding window
+- maintain median of continuous data stream
+- balance workloads between different resources.
+- Real-time monitoring - detect unusual patterns
+
+* Backtracking
+:PROPERTIES:
+:CUSTOM_ID: 1413
+:CLASS: oj ok gy be ol om on oo op oq or os ot ou ov ow ox oy oz pa pb pc pd pe pf pg bj
+:END:
+[[https://www.designgurus.io/course-play/grokking-the-coding-interview/doc/63d3bcd7f81b8e2fe5ded81c][Backtracking]]
+is a general algorithm for finding all (or some) solutions to a problem
+that incrementally builds candidates to the solutions, and abandons a
+candidate (“backtracks”) as soon as it determines that the candidate
+cannot be extended to a valid solution. This technique is often used in
+constraint satisfaction problems, where the goal is to find a solution
+that satisfies a set of constraints.
+
+#+caption: *Backtracking Example*
+
+*System Design Examples:*
+
+- Graph coloring problems, such as assigning frequencies to radio
+  stations in a way that no two adjacent stations share the same
+  frequency.
+- Job scheduling and resource allocation problems, where backtracking
+  can be used to find an optimal sequence of tasks that satisfies
+  various constraints, such as deadlines or resource availability.
+- The traveling salesman problem, where a salesman has to visit a number
+  of cities and return to the starting city with the shortest possible
+  route. Backtracking can be employed to explore all possible routes and
+  find the most optimal one.
+- The Sudoku puzzle, which is a logic-based, combinatorial
+  number-placement puzzle. Backtracking can be used to find a solution
+  by iteratively filling in the cells with appropriate numbers and
+  backtracking when a dead-end is reached.
+
+* Breadth-First Search (BFS)
+:PROPERTIES:
+:CUSTOM_ID: 1253
+:CLASS: oj ok gy be ol om on oo op oq or os ot ou ov ow ox oy oz pa pb pc pd pe pf pg bj
+:END:
+[[https://www.designgurus.io/course-play/grokking-the-coding-interview/doc/6394fc8223a10518807b1643][Breadth-First
+Search (BFS)]] is a graph traversal algorithm that explores all the
+vertices of a graph in breadth-first order, i.e., it visits all the
+vertices at the same level before moving on to the next level. BFS uses
+a queue data structure to keep track of the vertices to be visited and
+processes them in the order they were added to the queue.
+
+*System Design Examples:*
+
+- Social networks: BFS can be used to find the shortest path between two
+  users in a social network, which may represent the degree of
+  separation or the number of mutual connections between them.
+- Web crawlers: Search engines like Google use BFS-based algorithms to
+  crawl and index web pages, starting from a seed set of URLs and
+  following the hyperlinks in breadth-first order.
+- GPS navigation: BFS can be employed in finding the shortest route
+  between two locations on a map, considering various constraints like
+  road types, traffic conditions, and distance.
+- Network broadcasting: In computer networks, BFS can be used to
+  implement broadcasting, where a message is sent to all nodes in the
+  network, ensuring that each node receives the message exactly once.
+
+* Depth-First Search (DFS)
+:PROPERTIES:
+:CUSTOM_ID: 54cb
+:CLASS: oj ok gy be ol om on oo op oq or os ot ou ov ow ox oy oz pa pb pc pd pe pf pg bj
+:END:
+[[https://www.designgurus.io/course-play/grokking-the-coding-interview/doc/63989f4374c44bdc8812984b][Depth-First
+Search (DFS)]] is another graph traversal algorithm that explores the
+vertices of a graph in depth-first order. It visits a vertex and then
+recursively visits all its adjacent vertices before backtracking. DFS
+uses a stack data structure, either explicitly or implicitly through
+recursion, to keep track of the vertices being visited.
+
+*System Design Examples:*
+
+- Maze solving: DFS can be used to find a path from the starting point
+  to the goal in a maze by exploring all possible paths in a depth-first
+  manner and backtracking when a dead-end is encountered.
+- Dependency resolution: In build systems and package managers, DFS can
+  be used to resolve dependencies between components or packages,
+  ensuring that each dependency is built or installed before the
+  dependent component.
+- Topological sorting: DFS can be employed to perform topological
+  sorting of a directed acyclic graph (DAG), which is useful in
+  scheduling tasks with precedence constraints, such as project
+  management or build systems.
+- Finding connected components: In image processing, DFS can be used to
+  identify connected components or regions of an image with similar
+  properties, such as color or intensity.
+
+* Topological Sort
+:PROPERTIES:
+:CUSTOM_ID: 9643
+:CLASS: oj ok gy be ol om on oo op oq or os ot ou ov ow ox oy oz pa pb pc pd pe pf pg bj
+:END:
+[[https://www.designgurus.io/course-play/grokking-the-coding-interview/doc/63a59168228c6cae066fae96][Topological
+Sort]] is an algorithm for linearly ordering the vertices of a directed
+acyclic graph (DAG) such that for every directed edge (u, v), vertex u
+comes before vertex v in the ordering. Topological sorting is possible
+if and only if the graph has no directed cycles.
+
+#+caption: Topological Sort Patterb
+
+*System Design Examples:*
+
+- Project scheduling: Topological Sort can be used to determine the
+  order in which tasks in a project should be executed, taking into
+  account their dependencies.
+- Course prerequisites: In an academic curriculum, Topological Sort can
+  be employed to find a valid sequence of courses to be taken,
+  considering their prerequisites.
+- Build systems: In software build systems, Topological Sort can be
+  utilized to determine the correct order of compilation for a set of
+  files with dependencies.
+- Package managers: Package managers can use Topological Sort to install
+  packages and their dependencies in the correct order.
+
+* Merge Intervals
+:PROPERTIES:
+:CUSTOM_ID: 15cb
+:CLASS: oj ok gy be ol om on oo op oq or os ot ou ov ow ox oy oz pa pb pc pd pe pf pg bj
+:END:
+[[https://www.designgurus.io/course-play/grokking-the-coding-interview/doc/63923b23510946c22edc2e0a][Merge
+Intervals]] is an algorithm that, given a collection of intervals,
+merges any overlapping intervals into a single interval. The problem can
+be solved by first sorting the intervals based on their starting points,
+and then iterating through the sorted intervals and merging them if they
+overlap.
+
+#+caption: Merge Interval Pattern
+
+*System Design Examples:*
+
+- Calendar scheduling: Merge Intervals can be used to find free time
+  slots in a busy calendar by merging overlapping appointments or
+  events.
+- Resource allocation: In resource allocation problems, Merge Intervals
+  can be employed to determine periods of high demand or overlapping
+  usage.
+- Network traffic analysis: Merge Intervals can be utilized to analyze
+  network traffic data and identify periods of high traffic or
+  congestion.
+- Genome data processing: In bioinformatics, Merge Intervals can help
+  identify overlapping gene sequences or analyze genetic data.
+
+* Trie (Prefix Tree)
+:PROPERTIES:
+:CUSTOM_ID: 0961
+:CLASS: oj ok gy be ol om on oo op oq or os ot ou ov ow ox oy oz pa pb pc pd pe pf pg bj
+:END:
+A Trie, also known as a Prefix Tree, is a tree-like data structure that
+stores a dynamic set of strings. It is particularly useful for efficient
+searching, insertion, and deletion of strings in a large dataset. Each
+node in a Trie represents a character, and the path from the root to a
+node represents the corresponding prefix.
+
+#+caption: Trie
+
+*System Design Examples:*
+
+- Autocomplete suggestions: Tries are used in search engines and text
+  editors to provide autocomplete suggestions based on the user's input.
+- Spell checkers: Trie data structures can be employed in spell checkers
+  to efficiently store and search a dictionary of words.
+- IP routing: In computer networks, Tries can be used for IP routing to
+  quickly find the longest matching prefix in the routing table.
+- Bioinformatics: Tries can be utilized in bioinformatics applications
+  for searching and matching DNA sequences.
+
+* Union-Find (Disjoint Set)
+:PROPERTIES:
+:CUSTOM_ID: 8eae
+:CLASS: oj ok gy be ol om on oo op oq or os ot ou ov ow ox oy oz pa pb pc pd pe pf pg bj
+:END:
+Union-Find, also known as Disjoint Set, is a data structure that keeps
+track of a set of elements partitioned into a number of disjoint
+(non-overlapping) subsets. It supports two main operations: Union, which
+merges two subsets into one, and Find, which determines the subset that
+an element belongs to.
+
+*System Design Examples:*
+
+- Network connectivity: Union-Find can be used to efficiently check and
+  maintain connectivity between nodes in a network.
+- Image segmentation: In image processing, Union-Find can be employed
+  for segmenting an image into distinct regions based on similarity
+  criteria.
+- Kruskal's algorithm: Union-Find is a key component of Kruskal's
+  algorithm for finding the minimum spanning tree of a connected,
+  undirected graph.
+- Percolation simulation: Union-Find can be utilized in simulating
+  percolation in porous materials to determine whether a path exists
+  between two points.
+
+* Flood Fill
+:PROPERTIES:
+:CUSTOM_ID: b61c
+:CLASS: oj ok gy be ol om on oo op oq or os ot ou ov ow ox oy oz pa pb pc pd pe pf pg bj
+:END:
+[[https://www.designgurus.io/course-play/grokking-the-coding-interview/doc/6388cbb0765bb2154037ce84][Flood
+Fill]] is an algorithm used to determine the area connected to a given
+node in a multi-dimensional array, typically employed in image
+processing and computer graphics. The algorithm starts at a given node,
+replaces the target color with a new color, and recursively processes
+its neighboring nodes. The process continues until all connected nodes
+with the target color have been visited and updated.
+
+#+caption: Flood Fill Algorithm
+
+*System Design Examples:*
+
+- Image editing tools: Flood Fill is commonly used in image editing
+  tools for the “bucket fill” or “paint fill” feature, which allows
+  users to fill an area with a specific color.
+- Game development: In game development, Flood Fill can be employed to
+  fill a region with a particular texture or to determine the boundaries
+  of a region for gameplay purposes.
+- Map generation: Flood Fill can be used in map generation algorithms to
+  identify and fill connected regions or create islands in procedural
+  terrain generation.
+- Maze solving: Flood Fill can be utilized in maze-solving algorithms to
+  explore and mark visited areas, allowing the solver to find a path to
+  the exit.
+
+* Segment Tree
+:PROPERTIES:
+:CUSTOM_ID: f2d6
+:CLASS: oj ok gy be ol om on oo op oq or os ot ou ov ow ox oy oz pa pb pc pd pe pf pg bj
+:END:
+A Segment Tree is a tree-based data structure designed for efficient
+processing of range queries and updates on an array. It is particularly
+useful for problems that involve querying and updating array elements
+within specific ranges. Each node in the segment tree represents a range
+of elements in the array, and the tree is built in a hierarchical
+manner, with the leaves representing individual elements and the
+internal nodes representing the union of ranges of their children.
+
+#+caption: Segment Tree
+
+*System Design Examples:*
+
+- Range sum queries: Segment Trees can be used to efficiently calculate
+  the sum of elements within a specified range in an array, such as the
+  total income for a specific period in a financial application.
+- Range minimum/maximum queries: In applications that require finding
+  the minimum or maximum value within a range, Segment Trees can be
+  employed for efficient querying and updating, such as in stock market
+  analysis for identifying the highest or lowest stock prices within a
+  time frame.
+- Image processing: Segment Trees can be utilized in image processing
+  tasks that involve processing and updating pixel values within
+  specific regions, such as applying filters or adjusting brightness and
+  contrast.
+- Computational geometry: Segment Trees can be used in computational
+  geometry problems, such as finding the intersection of line segments
+  or calculating the area of overlapping rectangles within a specified
+  range.
+
+
+
+* common Interview Algorithm Questions
+
+** find k-min or k-max elems
+- For =k-max=, use a min-heap
+- add the first k elems to heap 
+- For each elem added after, min moves to the top, remove it
+- rest in heap are the result
+
+** find max distinct substring
+- Use 2 pointers (LP and RP), both set to first elem.
+- Move RP one step
+- keep moving RP while RP<len; add chars to a hash
+- if dup occurs:
+  - record current run
+  - keep advancing LP and remove char from hash, until dup is eliminated
+
+** Combination sums (backtracking)
+- You can take (repeated) elems if needed to get a sum
+- Sort the choices array; start with the max elem
+- Keep taking the max, till you reach or exceed target
+- If you reach target, you're done; explore next possible combination.
+- If you exceed, backtrack and recurse again.
+
+** Dynamic Programming
+- Break the problem down into smaller problems
+
+** BFS and DFS
+- Read up and practice Dijkstra's
+- Read up and practice topological sort.
